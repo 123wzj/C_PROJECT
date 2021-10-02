@@ -1,0 +1,26 @@
+//汉诺塔用递归函数调用
+//核心分而治之
+#include<stdio.h>
+void move(int n,char x,char y,char z)//将柱子x上n 个盘子，借助y，移动到z上
+{
+    if(1==n)
+    {
+        printf("%c-->%c\t",x,z);
+    }
+    else
+    {
+        move(n-1,x,z,y);//将柱子x上n-1 个盘子，借助z，移动到y上
+        printf("%c-->%c\t",x,z);//将x柱子上最后一个盘子移动到z上
+        move(n-1,y,x,z);//将柱子y上n-1 个盘子，借助x，移动到z上
+    }
+}
+int main()
+{
+    int n;
+    printf("请输入汉诺塔的层数：\n");
+    scanf("%d",&n);
+    printf("移动的步骤如下：\n");
+
+    move(n,'x','y','z');
+    return 0;
+}
