@@ -1,0 +1,53 @@
+//约瑟夫环问题
+#include<stdio.h>
+#include<stdlib.h>
+typedef struct listlink
+{
+    int data;
+    struct listlink *next;
+}node;
+node *createlist(int n)//生成链表
+{
+    node *p,*head=NULL;
+    head=(node*)malloc(sizeof(node));
+    p=head;
+    node *s;
+    int i=1;
+    if(0!=n)
+    {
+        while (i<=n)
+        {
+            s=(node*)malloc(sizeof(node));
+            s->data=i++;
+            p->next=s;
+            p=s;
+        }
+        s->next=head->next;//形成环
+    }
+    free(head);
+return s->next;
+}
+int main()
+{
+    int n=41;
+    int m=3;
+    int i;
+    node *p=createlist(n);
+    node *temp;
+    m%=n;
+    while(p!=p->next)
+    {
+        for(i=1;i<m-1;i++)
+        {
+            p=p->next;
+        }
+        printf("%d->",p->next->data);
+        //删除第m个节点
+        temp=p->next;
+        p->next=temp->next;
+        free(temp);
+        p=p->next;
+    }
+    printf("%d\n",p->data);
+    return 0;
+}
